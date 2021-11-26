@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 
 class MainScreen extends StatelessWidget {
-  final mainScreenController = Get.put(MainScreenController());
+  final mainScreenController = Get.put(MainScreenLogic());
   final List<Widget> list = [
     DashboardScreen(),
     // TODO: add here
@@ -33,7 +33,7 @@ class MainScreen extends StatelessWidget {
             Expanded(
               // It takes 5/6 part of the screen
               flex: 5,
-              child: list[mainScreenController.selectedItem.value],
+              child: Obx(()=>list[mainScreenController.selectedItem.value]),
             ),
           ],
         ),
@@ -42,15 +42,24 @@ class MainScreen extends StatelessWidget {
   }
 }
 
-class MainScreenController extends GetxController{
+class MainScreenLogic extends GetxController{
   RxInt selectedItem = 0.obs;
+}
+
+class MainScreenBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut(() => MainScreenLogic());
+  }
 }
 
 
 class SideMenu extends StatelessWidget {
-  const SideMenu({
+   SideMenu({
     Key? key,
   }) : super(key: key);
+
+   final mainScreenController = Get.put(MainScreenLogic());
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +73,7 @@ class SideMenu extends StatelessWidget {
             title: "Dashboard",
             svgSrc: "assets/icons/menu_dashboard.svg",
             press: () {
-
+              mainScreenController.selectedItem.value = 0;
             },
           ),
           DrawerListTile(
