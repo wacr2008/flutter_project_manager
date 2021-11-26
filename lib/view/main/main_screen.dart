@@ -1,4 +1,4 @@
-import 'package:admin/controllers/MenuController.dart';
+import 'package:admin/controllers/menu_controller.dart';
 import 'package:admin/utils/responsive.dart';
 import 'package:admin/view/dashboard/dashboard_screen.dart';
 

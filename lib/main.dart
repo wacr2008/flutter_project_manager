@@ -1,9 +1,10 @@
 import 'package:admin/constants.dart';
-import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/view/main/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
+import 'controllers/menu_controller.dart';
 
 void main() {
   runApp(MyApp());
