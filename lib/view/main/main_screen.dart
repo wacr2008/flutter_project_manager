@@ -1,6 +1,7 @@
 import 'package:admin/controllers/menu_controller.dart';
 import 'package:admin/utils/responsive.dart';
 import 'package:admin/view/dashboard/dashboard_screen.dart';
+import 'package:admin/view/task_board/task_board_view.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,10 +11,7 @@ import 'package:provider/provider.dart';
 
 class MainScreen extends StatelessWidget {
   final mainScreenController = Get.put(MainScreenLogic());
-  final List<Widget> list = [
-    DashboardScreen(),
-    // TODO: add here
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +31,7 @@ class MainScreen extends StatelessWidget {
             Expanded(
               // It takes 5/6 part of the screen
               flex: 5,
-              child: Obx(()=>list[mainScreenController.selectedItem.value]),
+              child: Obx(()=>mainScreenController.list[mainScreenController.selectedItem.value]),
             ),
           ],
         ),
@@ -44,6 +42,11 @@ class MainScreen extends StatelessWidget {
 
 class MainScreenLogic extends GetxController{
   RxInt selectedItem = 0.obs;
+  final List<Widget> list = [
+    DashboardScreen(),
+    TaskBoardPage(),
+    // TODO: add here
+  ];
 }
 
 class MainScreenBinding extends Bindings {
@@ -55,7 +58,7 @@ class MainScreenBinding extends Bindings {
 
 
 class SideMenu extends StatelessWidget {
-   SideMenu({
+  SideMenu({
     Key? key,
   }) : super(key: key);
 
@@ -80,42 +83,37 @@ class SideMenu extends StatelessWidget {
             title: "Transaction",
             svgSrc: "assets/icons/menu_tran.svg",
             press: () {
-
             },
           ),
           DrawerListTile(
-            title: "Task",
-            svgSrc: "assets/icons/menu_task.svg",
+            title: "需求面板",
+            svgSrc: "icons/menu_developing.svg",
             press: () {
-
+              mainScreenController.selectedItem.value = 1;
             },
           ),
           DrawerListTile(
             title: "Documents",
             svgSrc: "assets/icons/menu_doc.svg",
             press: () {
-
             },
           ),
           DrawerListTile(
             title: "Store",
             svgSrc: "assets/icons/menu_store.svg",
             press: () {
-
             },
           ),
           DrawerListTile(
             title: "Notification",
             svgSrc: "assets/icons/menu_notification.svg",
             press: () {
-
             },
           ),
           DrawerListTile(
             title: "Profile",
             svgSrc: "assets/icons/menu_profile.svg",
             press: () {
-
             },
           ),
           DrawerListTile(
