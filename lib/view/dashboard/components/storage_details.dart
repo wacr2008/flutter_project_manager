@@ -1,11 +1,12 @@
-import 'package:admin/view/dashboard/components/storage_info_card.dart';
+import 'package:admin/view/components/info_card.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
-import 'chart.dart';
+import '../../components/chart.dart';
 
 class StorageDetails extends StatelessWidget {
-  const StorageDetails({
+   StorageDetails({
     Key? key,
   }) : super(key: key);
 
@@ -28,33 +29,70 @@ class StorageDetails extends StatelessWidget {
             ),
           ),
           SizedBox(height: defaultPadding),
-          Chart(),
-          StorageInfoCard(
+          Chart(
+            enableCentralTitle: true,
+            paiChartSelectionDatas: paiChartSelectionDatas,
+            centralTitle: '共计',
+            centralSubTitle: 'xxx条',
+          ),
+          InfoCard(
             svgSrc: "assets/icons/Documents.svg",
             title: "Documents Files",
-            amountOfFiles: "1.3GB",
-            numOfFiles: 1328,
+            amount: "1.3GB",
+            subTitle: '1328',
           ),
-          StorageInfoCard(
+          InfoCard(
             svgSrc: "assets/icons/media.svg",
             title: "Media Files",
-            amountOfFiles: "15.3GB",
-            numOfFiles: 1328,
+            amount: "15.3GB",
+            subTitle: '1328',
           ),
-          StorageInfoCard(
+          InfoCard(
             svgSrc: "assets/icons/folder.svg",
             title: "Other Files",
-            amountOfFiles: "1.3GB",
-            numOfFiles: 1328,
+            amount: "1.3GB",
+            subTitle: '1328',
           ),
-          StorageInfoCard(
+          InfoCard(
             svgSrc: "assets/icons/unknown.svg",
             title: "Unknown",
-            amountOfFiles: "1.3GB",
-            numOfFiles: 140,
+            amount: "1.3GB",
+            subTitle: '140',
           ),
         ],
       ),
     );
   }
+  final List<PieChartSectionData> paiChartSelectionDatas = [
+    PieChartSectionData(
+      color: primaryColor,
+      value: 25,
+      showTitle: false,
+      radius: 25,
+    ),
+    PieChartSectionData(
+      color: Color(0xFF26E5FF),
+      value: 20,
+      showTitle: false,
+      radius: 22,
+    ),
+    PieChartSectionData(
+      color: Color(0xFFFFCF26),
+      value: 10,
+      showTitle: false,
+      radius: 19,
+    ),
+    PieChartSectionData(
+      color: Color(0xFFEE2727),
+      value: 15,
+      showTitle: false,
+      radius: 16,
+    ),
+    PieChartSectionData(
+      color: primaryColor.withOpacity(0.1),
+      value: 25,
+      showTitle: false,
+      radius: 13,
+    ),
+  ];
 }

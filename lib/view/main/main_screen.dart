@@ -93,7 +93,7 @@ class SideMenu extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: "Documents",
+            title: "归档",
             svgSrc: "assets/icons/menu_doc.svg",
             press: () {
             },
