@@ -1,8 +1,7 @@
 import 'package:admin/utils/responsive.dart';
 import 'package:admin/view/components/header.dart';
-import 'package:admin/view/dashboard/components/my_fields.dart';
-import 'package:admin/view/dashboard/components/recent_files.dart';
 import 'package:admin/view/dashboard/components/storage_details.dart';
+import 'package:admin/view/task_board/components/all_tasks.dart';
 import 'package:admin/view/task_board/task_board_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,12 +28,11 @@ class TaskBoardPage extends StatelessWidget {
                   flex: 5,
                   child: Column(
                     children: [
-                      MyFiles(),
-                      SizedBox(height: defaultPadding),
-                      RecentFiles(),
-                      if (Responsive.isMobile(context))
+                      AllTasks(),
+                      // if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),
-                      if (Responsive.isMobile(context)) StorageDetails(),
+                      // if (Responsive.isMobile(context))
+                        StorageDetails(),
                     ],
                   ),
                 ),

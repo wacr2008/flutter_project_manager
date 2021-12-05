@@ -49,8 +49,6 @@ class Chart extends StatelessWidget {
                 ],
               ),
             ),
-
-
         ],
       ),
     );
