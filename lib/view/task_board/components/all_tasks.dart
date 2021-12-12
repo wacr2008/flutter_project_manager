@@ -1,3 +1,4 @@
+import 'package:admin/models/allNeeds.dart';
 import 'package:admin/models/recent_file.dart';
 import 'package:admin/view/components/folding_cell.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class AllTasks extends StatelessWidget {
                 return FoldingCell(
                   key: ValueKey(index),
                   id: index + 1,
-                  taskState: '处理中',
+                  taskState: AllNeeds.allNeeds[0]['taskState'],
                   taskPriority: '高',
                   taskTitle: '标题',
                   taskCreater: 'zwn',
@@ -44,10 +45,10 @@ class AllTasks extends StatelessWidget {
                   foldingState: openedIndices.contains(index) ? FoldingState.open : FoldingState.close,
                   onChanged: (foldState) {
                     if (foldState == FoldingState.open) {
-                      print('打开了 cell -- $index');
+                      // print('打开了 cell -- $index');
                       openedIndices.add(index);
                     } else {
-                      print('关闭了 cell -- $index');
+                      // print('关闭了 cell -- $index');
                       openedIndices.remove(index);
                     }
                   },

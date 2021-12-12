@@ -31,7 +31,7 @@ dependencies:
   get: ^4.3.8
 
   google_fonts: ^2.1.0
-  flutter_svg: ^1.0.0
+  flutter_svg: ^0.22.0
   fl_chart: ^0.40.6
   provider: ^6.0.1
   data_table_2: ^2.0.3
