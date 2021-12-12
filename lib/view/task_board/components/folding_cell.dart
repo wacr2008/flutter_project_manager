@@ -225,7 +225,9 @@ class _FoldingCellState extends State<FoldingCell>
                         child: FoldingComponent(
                           isFrontShowing: true,
                           frontChild: Container(
-                            child: taskCardFlowChartComponent(),
+                            child: taskCardFlowChartComponent(
+                              flowInfo: []
+                            ),
                           ),
                           animation: generateAnimation(
                             beginAngle: 0.0,

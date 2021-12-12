@@ -1,6 +1,7 @@
+import 'package:admin/view/task_board/components/flow_chart.dart';
 import 'package:flutter/material.dart';
 
-import 'color_hex.dart';
+import '../../components/color_hex.dart';
 
 // class CellContentPage extends StatelessWidget {
 //   const CellContentPage({Key? key}) : super(key: key);
@@ -49,7 +50,7 @@ import 'color_hex.dart';
 //   }
 // }
 
-/// 组件 1
+/// 封面
 Widget taskCardCover({required int id, required String taskState,
   required String taskPriority, required String taskTitle, required String taskCreater,
   required String taskCreateTime, required String taskManager, required String taskDeadLine}) {
@@ -144,7 +145,7 @@ Widget taskCardCover({required int id, required String taskState,
   );
 }
 
-/// 组件 2
+/// 展开后的封面
 Widget taskCardDetailCover({required int id, required String taskState, required String taskCreater,
     required String taskCreateTime, required String taskManager, required String taskDeadLine}) {
   return Container(
@@ -213,7 +214,7 @@ Widget taskCardDetailCover({required int id, required String taskState, required
   );
 }
 
-/// 组件 3
+/// 标题（第一行
 Widget taskCardTitleComponent({required String taskTitle, required String taskPriority}) {
   return Container(
     color: Colors.white,
@@ -251,20 +252,17 @@ Widget taskCardTitleComponent({required String taskTitle, required String taskPr
   );
 }
 
-/// 组件 4
-Widget taskCardFlowChartComponent() {
+/// 流程（第二行
+Widget taskCardFlowChartComponent({required flowInfo}) {
+  List flow = ['已创建','审核中','执行中'];
   return Container(
     color: Colors.white,
-    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-    child: Row(
-      children: [
-         Text('这里放流程图')
-      ],
-    ),
+    padding: EdgeInsets.fromLTRB(22, 0, 10, 0),
+    child: flowChart(flowInfo: flow),
   );
 }
 
-/// 组件 6
+/// 下载文档
 Widget taskCardGetFileComponent() {
   return ClipRRect(
     borderRadius: BorderRadius.vertical(bottom: Radius.circular(8)),

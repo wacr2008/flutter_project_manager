@@ -1,6 +1,5 @@
 import 'package:admin/models/allNeeds.dart';
-import 'package:admin/models/recent_file.dart';
-import 'package:admin/view/components/folding_cell.dart';
+import 'package:admin/view/task_board/components/folding_cell.dart';
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 
@@ -11,7 +10,7 @@ class AllTasks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late Set<int> openedIndices = {};
+    Set<int> openedIndices = {};
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
@@ -62,40 +61,40 @@ class AllTasks extends StatelessWidget {
   }
 }
 
-DataRow recentFileDataRow(RecentFile fileInfo) {
-  return DataRow(
-    cells: [
-      DataCell(Text(fileInfo.title!),),
-      DataCell(Text(fileInfo.date!)),
-      DataCell(Text(fileInfo.size!)),
-      DataCell(Text(fileInfo.size!)),
-      DataCell(Text(fileInfo.size!)),
-      DataCell(Text(fileInfo.size!)),
-      DataCell(Text(fileInfo.size!)),
-    ],
-  );
-}
+// DataRow recentFileDataRow(RecentFile fileInfo) {
+//   return DataRow(
+//     cells: [
+//       DataCell(Text(fileInfo.title!),),
+//       DataCell(Text(fileInfo.date!)),
+//       DataCell(Text(fileInfo.size!)),
+//       DataCell(Text(fileInfo.size!)),
+//       DataCell(Text(fileInfo.size!)),
+//       DataCell(Text(fileInfo.size!)),
+//       DataCell(Text(fileInfo.size!)),
+//     ],
+//   );
+// }
 
-List<DataColumn> dataColumns = [
-  DataColumn(
-    label: Text("需求名称"),
-  ),
-  DataColumn(
-    label: Text("状态"),
-  ),
-  DataColumn(
-    label: Text("优先级"),
-  ),
-  DataColumn(
-    label: Text("创建人"),
-  ),
-  DataColumn(
-    label: Text("负责人"),
-  ),
-  DataColumn(
-    label: Text("截止日期"),
-  ),
-  DataColumn(
-    label: Text("需求文档"),
-  ),
-];
+// List<DataColumn> dataColumns = [
+//   DataColumn(
+//     label: Text("需求名称"),
+//   ),
+//   DataColumn(
+//     label: Text("状态"),
+//   ),
+//   DataColumn(
+//     label: Text("优先级"),
+//   ),
+//   DataColumn(
+//     label: Text("创建人"),
+//   ),
+//   DataColumn(
+//     label: Text("负责人"),
+//   ),
+//   DataColumn(
+//     label: Text("截止日期"),
+//   ),
+//   DataColumn(
+//     label: Text("需求文档"),
+//   ),
+// ];
