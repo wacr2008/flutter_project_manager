@@ -1,9 +1,9 @@
 import 'package:admin/view/components/info_card.dart';
+import 'package:admin/view/components/myPieChart.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
-import '../../components/chart.dart';
 
 class StorageDetails extends StatelessWidget {
    StorageDetails({
@@ -29,12 +29,13 @@ class StorageDetails extends StatelessWidget {
             ),
           ),
           SizedBox(height: defaultPadding),
-          Chart(
+          /*Chart(
             enableCentralTitle: true,
             paiChartSelectionDatas: paiChartSelectionDatas,
             centralTitle: '共计',
             centralSubTitle: 'xxx条',
-          ),
+          ),*/
+          MyPieChart(),
           InfoCard(
             svgSrc: "assets/icons/Documents.svg",
             title: "Documents Files",

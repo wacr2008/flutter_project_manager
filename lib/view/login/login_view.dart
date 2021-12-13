@@ -424,7 +424,10 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
       }
     }
     return Scaffold(
-      body: Stack(
+      body:
+      // LogPage()
+      // Center(child: LogItemCard(senderName: "senderName", commitContent: "commitContent", projectName: "projectName", time: "time"),),
+      Stack(
         children: [
           Positioned.fill(child: AnimatedBackground()),
           Positioned.fill(child: Particles(30)),

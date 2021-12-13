@@ -1,6 +1,6 @@
 import 'package:admin/controllers/menu_controller.dart';
 import 'package:admin/utils/responsive.dart';
-import 'package:admin/view/dashboard/dashboard_screen.dart';
+import 'package:admin/view/log/log_view.dart';
 import 'package:admin/view/task_board/task_board_view.dart';
 
 import 'package:flutter/material.dart';
@@ -43,7 +43,7 @@ class MainScreen extends StatelessWidget {
 class MainScreenLogic extends GetxController{
   RxInt selectedItem = 0.obs;
   final List<Widget> list = [
-    DashboardScreen(),
+    LogPage(),
     TaskBoardPage(),
     // TODO: add here
   ];

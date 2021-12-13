@@ -27,15 +27,17 @@ class LoginController extends GetxController {
   void handleLogin() async {
     Timer(Duration(seconds: 1), () {
       btnController.success();
-      Get.to(() {
-        return MultiProvider(
-          providers: [
-            ChangeNotifierProvider(
-              create: (context) => MenuController(),
-            ),
-          ],
-          child: MainScreen(),
-        );
+      Timer(Duration(seconds: 1), () {
+        Get.to(() {
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider(
+                create: (context) => MenuController(),
+              ),
+            ],
+            child: MainScreen(),
+          );
+        });
       });
     });
   }
