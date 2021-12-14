@@ -1,7 +1,7 @@
 import 'package:admin/controllers/menu_controller.dart';
 import 'package:admin/utils/responsive.dart';
+import 'package:admin/view/demand_board/my_demand_board_view.dart';
 import 'package:admin/view/log/log_view.dart';
-import 'package:admin/view/task_board/task_board_view.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -44,7 +44,7 @@ class MainScreenLogic extends GetxController{
   RxInt selectedItem = 0.obs;
   final List<Widget> list = [
     LogPage(),
-    TaskBoardPage(),
+    MyDemandBoardPage()
     // TODO: add here
   ];
 }
