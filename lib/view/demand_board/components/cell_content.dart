@@ -168,11 +168,9 @@ Widget taskCardDetailCover({required int id, required String taskState, required
 }
 
 PopupMenuButton managerMenu = new PopupMenuButton<String>(
-//这是点击弹出菜单的操做，点击对应菜单后，改变屏幕中间文本状态，将点击的菜单值赋予屏幕中间文本
     onSelected: (String value) {
 
     },
-//这是弹出菜单的创建，包含了两个子项，分别是增长和删除以及他们对应的值
     itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
           PopupMenuItem(
             child: new Row(
@@ -204,11 +202,9 @@ PopupMenuButton managerMenu = new PopupMenuButton<String>(
 );
 
 PopupMenuButton createrMenu = new PopupMenuButton<String>(
-//这是点击弹出菜单的操做，点击对应菜单后，改变屏幕中间文本状态，将点击的菜单值赋予屏幕中间文本
     onSelected: (String value) {
 
     },
-//这是弹出菜单的创建，包含了两个子项，分别是增长和删除以及他们对应的值
     itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
       PopupMenuItem(
         child: new Row(
