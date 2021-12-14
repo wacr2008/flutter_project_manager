@@ -1,16 +1,15 @@
-import 'package:admin/utils/responsive.dart';
 import 'package:admin/view/components/header.dart';
 import 'package:admin/view/dashboard/components/storage_details.dart';
-import 'package:admin/view/task_board/components/all_tasks.dart';
-import 'package:admin/view/task_board/task_board_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants.dart';
+import 'components/all_demands.dart';
+import 'my_demand_board_logic.dart';
 
 
-class TaskBoardPage extends StatelessWidget {
-  final logic = Get.put(TaskBoardLogic());
+class MyDemandBoardPage extends StatelessWidget {
+  final logic = Get.put(MyDemandBoardLogic());
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class TaskBoardPage extends StatelessWidget {
                   flex: 5,
                   child: Column(
                     children: [
-                      AllTasks(),
+                      AllMyDemands(),
                       // if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),
                       // if (Responsive.isMobile(context))

@@ -1,7 +1,7 @@
-import 'package:admin/view/task_board/components/flow_chart.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/color_hex.dart';
+import 'flow_chart.dart';
 
 // class CellContentPage extends StatelessWidget {
 //   const CellContentPage({Key? key}) : super(key: key);

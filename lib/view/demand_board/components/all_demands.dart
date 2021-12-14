@@ -1,10 +1,10 @@
 import 'package:admin/models/allNeeds.dart';
-import 'package:admin/view/task_board/components/folding_cell.dart';
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
+import 'folding_cell.dart';
 
-class AllTasks extends StatelessWidget {
-  const AllTasks({
+class AllMyDemands extends StatelessWidget {
+  const AllMyDemands({
     Key? key,
   }) : super(key: key);
 

@@ -1,11 +1,23 @@
 import 'package:admin/constants.dart';
+import 'package:admin/utils/sharedpreference_util.dart';
+import 'package:admin/view/add_demand/AddDemandView.dart';
 import 'package:admin/view/login/login_view.dart';
+import 'package:admin/view/main/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import 'controllers/menu_controller.dart';
+
 
 void main() {
+  init();
   runApp(MyApp());
+}
+
+void init(){
+  SharedPreferenceUtil.initialize();
 }
 
 class MyApp extends StatelessWidget {
@@ -21,11 +33,14 @@ class MyApp extends StatelessWidget {
             .apply(bodyColor: Colors.white),
         canvasColor: secondaryColor,
       ),
-      home: LoginPage()
-      // Center(
-      //   child: LogItemCard(senderName: "RyanSkylark", commitContent: "commitContent", projectName: "projectName", time: "time"),
-      // )
-      // LoginPage()
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => MenuController(),
+          ),
+        ],
+        child: MainScreen(),
+      )
     );
   }
 }
