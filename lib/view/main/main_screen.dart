@@ -1,5 +1,6 @@
 import 'package:admin/controllers/menu_controller.dart';
 import 'package:admin/utils/responsive.dart';
+import 'package:admin/view/add_demand/AddDemandView.dart';
 import 'package:admin/view/demand_board/my_demand_board_view.dart';
 import 'package:admin/view/log/log_view.dart';
 
@@ -44,6 +45,7 @@ class MainScreenLogic extends GetxController{
   RxInt selectedItem = 0.obs;
   final List<Widget> list = [
     LogPage(),
+    AddDemandPage(),
     MyDemandBoardPage()
     // TODO: add here
   ];
@@ -80,33 +82,22 @@ class SideMenu extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: "Transaction",
-            svgSrc: "assets/icons/menu_tran.svg",
+            title: "添加需求",
+            svgSrc: "assets/icons/menu_add_demand.svg",
             press: () {
+              mainScreenController.selectedItem.value = 1;
             },
           ),
           DrawerListTile(
             title: "需求面板",
             svgSrc: "icons/menu_developing.svg",
             press: () {
-              mainScreenController.selectedItem.value = 1;
+              mainScreenController.selectedItem.value = 2;
             },
           ),
           DrawerListTile(
             title: "归档",
             svgSrc: "assets/icons/menu_doc.svg",
-            press: () {
-            },
-          ),
-          DrawerListTile(
-            title: "Store",
-            svgSrc: "assets/icons/menu_store.svg",
-            press: () {
-            },
-          ),
-          DrawerListTile(
-            title: "Notification",
-            svgSrc: "assets/icons/menu_notification.svg",
             press: () {
             },
           ),
