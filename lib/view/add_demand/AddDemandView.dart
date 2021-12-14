@@ -1,3 +1,4 @@
+import 'package:admin/utils/uploadFile/upload_widget.dart';
 import 'package:admin/view/components/header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,7 +29,6 @@ class AddDemandPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    flex: 5,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -37,6 +37,8 @@ class AddDemandPage extends StatelessWidget {
                         _selectDeadLine(context),
                         _selectManager(),
                         _selectPriority(),
+                        _selectDemandFile(),
+
                         // if (Responsive.isMobile(context))
                         // if (Responsive.isMobile(context))
                       ],
@@ -45,6 +47,8 @@ class AddDemandPage extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 60,),
+            confirmButton,
           ],
         ),
       ),
@@ -260,4 +264,34 @@ class AddDemandPage extends StatelessWidget {
       },
     );
   }
+
+  Widget _selectDemandFile(){
+    return Container(
+        margin: EdgeInsets.fromLTRB(20, 10, 0, 20),
+        child:  Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              '上传需求文档:',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+            ),
+            SizedBox(width: 26,),
+            Expanded(child: UploadWidget()),
+            SizedBox(width: 160,)
+          ],
+        )
+    );
+  }
+
+  FloatingActionButton confirmButton = FloatingActionButton(
+    backgroundColor: Colors.lightBlue,
+    child: Icon(Icons.assignment_turned_in_rounded, size: 28,),
+    onPressed: () {
+
+    },
+  );
 }

@@ -1,54 +1,9 @@
+import 'package:admin/utils/sharedpreference_util.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../components/color_hex.dart';
 import 'flow_chart.dart';
-
-// class CellContentPage extends StatelessWidget {
-//   const CellContentPage({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.teal,
-//       body: SingleChildScrollView(
-//         child: Container(
-//             padding: EdgeInsets.all(44),
-//             width: double.infinity,
-//             child: Column(
-//               mainAxisSize: MainAxisSize.max,
-//               children: [
-//                 componentTitle('组件 1'),
-//                 taskCardCover(1, '处理中','高','题目','whc',
-//                     '2021-12-3 08:00','whc','2021-12-3 09:00'),
-//                 componentTitle('组件 2'),
-//                 taskCardDetailCover(1, '处理中','whc',
-//                     '2021-12-3 08:00','whc','2021-12-3 09:00'),
-//                 componentTitle('组件 3'),
-//                 taskCardTitleComponent('标题','优先级'),
-//                 componentTitle('组件 4'),
-//                 taskCardFlowChartComponent(),
-//                 componentTitle('组件 6'),
-//                 taskCardGetFileComponent(),
-//               ],
-//             )),
-//       ),
-//     );
-//   }
-//
-//   /// 组件标题
-//   Widget componentTitle(String title) {
-//     return Container(
-//       height: 34,
-//       padding: EdgeInsets.symmetric(vertical: 8),
-//       alignment: Alignment.bottomLeft,
-//       child: Text(title,
-//           style: TextStyle(
-//             color: Colors.white,
-//             fontSize: 14,
-//           )),
-//     );
-//   }
-// }
 
 /// 封面
 Widget taskCardCover({required int id, required String taskState,
@@ -148,6 +103,7 @@ Widget taskCardCover({required int id, required String taskState,
 /// 展开后的封面
 Widget taskCardDetailCover({required int id, required String taskState, required String taskCreater,
     required String taskCreateTime, required String taskManager, required String taskDeadLine}) {
+ SharedPreferences s = SharedPreferenceUtil.instance;
   return Container(
     child: Column(
       children: [
@@ -175,13 +131,10 @@ Widget taskCardDetailCover({required int id, required String taskState, required
                 ),
               ),
               Expanded(child: SizedBox(width: 12,)),
-              IconButton(
-                icon: Icon(Icons.menu),
-                color: Colors.white,
-                onPressed: (){
-
-                },
-              ),
+              if(s.getString('identity') == '产品')
+                createrMenu,
+              if(s.getString('identity') == '技术')
+                managerMenu,
             ],
           ),
         ),
@@ -213,6 +166,71 @@ Widget taskCardDetailCover({required int id, required String taskState, required
     ),
   );
 }
+
+PopupMenuButton managerMenu = new PopupMenuButton<String>(
+//这是点击弹出菜单的操做，点击对应菜单后，改变屏幕中间文本状态，将点击的菜单值赋予屏幕中间文本
+    onSelected: (String value) {
+
+    },
+//这是弹出菜单的创建，包含了两个子项，分别是增长和删除以及他们对应的值
+    itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+          PopupMenuItem(
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Icon(
+                  Icons.download_done,
+                  color: Colors.black,
+                ),
+                Text('已完成该需求'),
+              ],
+            ),
+            value: '完成',
+          ),
+          PopupMenuItem(
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Icon(
+                  Icons.highlight_off,
+                  color: Colors.black,
+                ),
+                Text('拒绝该需求')
+              ],
+            ),
+            value: '拒绝',
+          ),
+        ]
+);
+
+PopupMenuButton createrMenu = new PopupMenuButton<String>(
+//这是点击弹出菜单的操做，点击对应菜单后，改变屏幕中间文本状态，将点击的菜单值赋予屏幕中间文本
+    onSelected: (String value) {
+
+    },
+//这是弹出菜单的创建，包含了两个子项，分别是增长和删除以及他们对应的值
+    itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+      PopupMenuItem(
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Icon(Icons.download_done,color: Colors.black,),
+            Text('需求验收通过'),
+          ],
+        ),
+        value: '通过',
+      ),
+      PopupMenuItem(
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Icon(Icons.highlight_off,color: Colors.black,),
+            Text('需求验收未通过'),
+          ],
+        ),
+        value: '未通过',
+      )
+    ]);
 
 /// 标题（第一行
 Widget taskCardTitleComponent({required String taskTitle, required String taskPriority}) {
