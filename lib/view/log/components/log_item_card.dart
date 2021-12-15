@@ -28,7 +28,15 @@ class LogItemCard extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
-        border: new Border.all(color: Colors.white54, width: 0.5),
+        // border: new Border.all(color: Colors.white54, width: 0.5),
+        gradient: LinearGradient(
+          colors: [
+            Color(0xff292b49),
+            Color(0xFF161B24),
+          ],
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+        ),
         // color: Colors.white,
       ),
       child: Column(
