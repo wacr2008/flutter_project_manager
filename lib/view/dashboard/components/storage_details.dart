@@ -19,7 +19,7 @@ class StorageDetails extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             "Storage Details",
@@ -27,6 +27,7 @@ class StorageDetails extends StatelessWidget {
               fontSize: 18,
               fontWeight: FontWeight.w500,
             ),
+            textAlign: TextAlign.left,
           ),
           SizedBox(height: defaultPadding),
           /*Chart(

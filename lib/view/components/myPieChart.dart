@@ -12,6 +12,11 @@ class MyPieChart extends StatefulWidget {
 class _MyPieChartState extends State<MyPieChart>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
+  Color enterColor = Colors.black54;
+  Color exitColor = Colors.transparent;
+  Color enterBackColor = Color(0xFF212332);
+  Color exitBackColor = Color(0xFF2A2D3E);
+  bool isEnter = false;
 
   //控制饼图使用的
   late Animation<double> _progressAnimation;
@@ -102,31 +107,45 @@ class _MyPieChartState extends State<MyPieChart>
             painter: MyPainter(_list, _progressAnimation.value),
           ),
         ),
-        Container(
-          width: 150,
-          height: 150,
-          decoration: BoxDecoration(
-            color: Color(0xFF2A2D3E),
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
+        MouseRegion(
+          onEnter: (event) {
+            setState(() {
+              isEnter = !isEnter;
+            });
+          },
+          onExit: (event) {
+            setState(() {
+              isEnter = !isEnter;
+            });
+          },
+          // cursor: SystemMouseCursors.click,
+          child:  Container(
+            width: isEnter ? 150 : 140,
+            height: isEnter ? 150 : 140,
+            decoration: BoxDecoration(
+              color: isEnter ? enterBackColor : exitBackColor,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
                   spreadRadius: 3 * _numberAnimation.value,
                   blurRadius: 5 * _numberAnimation.value,
                   offset: Offset(
                       5 * _numberAnimation.value, 5 * _numberAnimation.value),
-                  color: Colors.black54),
-            ],
-          ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "总需求",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  color: isEnter ? enterColor : exitColor,
                 ),
-                Text("100", style: TextStyle(fontSize: 18))
               ],
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "总需求",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  ),
+                  Text("100", style: TextStyle(fontSize: 18))
+                ],
+              ),
             ),
           ),
         ),

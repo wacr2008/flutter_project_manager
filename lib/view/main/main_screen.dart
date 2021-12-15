@@ -3,6 +3,7 @@ import 'package:admin/utils/responsive.dart';
 import 'package:admin/view/add_demand/AddDemandView.dart';
 import 'package:admin/view/demand_board/my_demand_board_view.dart';
 import 'package:admin/view/log/log_view.dart';
+import 'package:admin/view/profile/profile_view.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -46,7 +47,8 @@ class MainScreenLogic extends GetxController{
   final List<Widget> list = [
     LogPage(),
     AddDemandPage(),
-    MyDemandBoardPage()
+    MyDemandBoardPage(),
+    ProfilePage(),
     // TODO: add here
   ];
 }
@@ -105,6 +107,7 @@ class SideMenu extends StatelessWidget {
             title: "Profile",
             svgSrc: "assets/icons/menu_profile.svg",
             press: () {
+              mainScreenController.selectedItem.value = 3;
             },
           ),
           DrawerListTile(
