@@ -37,6 +37,8 @@ class AllMyDemands extends StatelessWidget {
                   taskState: AllNeeds.allNeeds[0]['taskState'],
                   taskPriority: '高',
                   taskTitle: '标题',
+                  timeLineInfo: [],
+                  taskProject: '2333',
                   taskCreater: 'zwn',
                   taskCreateTime: '2021-12-3 08:00',
                   taskManager: 'whc',

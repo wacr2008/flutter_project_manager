@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddDemandLogic extends GetxController {
   RxBool hasInputTitle = true.obs;
   final TextEditingController titleController = TextEditingController();
+  RxBool hasInputProject = true.obs;
+  final TextEditingController projectController = TextEditingController();
   RxString selectedDeadLine = '未选择截止日期'.obs;
 
   List<String> _managerList = [

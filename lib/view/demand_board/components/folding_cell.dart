@@ -30,6 +30,9 @@ class FoldingCell extends StatefulWidget {
   ///标题
   final String taskTitle;
 
+  ///所属项目
+  final String taskProject;
+
   ///创建者
   final String taskCreater;
 
@@ -42,16 +45,21 @@ class FoldingCell extends StatefulWidget {
   ///ddl
   final String taskDeadLine;
 
+  ///timeLine
+  final List timeLineInfo;
+
   const FoldingCell({
     Key? key,
     required this.id,
     required this.taskState,
     required this.taskPriority,
     required this.taskTitle,
+    required this.taskProject,
     required this.taskCreater,
     required this.taskCreateTime,
     required this.taskManager,
     required this.taskDeadLine,
+    required this.timeLineInfo,
     required this.onChanged,
     this.foldingState = FoldingState.close,
   }) : super(key: key);
@@ -60,13 +68,17 @@ class FoldingCell extends StatefulWidget {
   _FoldingCellState createState() => _FoldingCellState();
 }
 
-class _FoldingCellState extends State<FoldingCell>
-    with SingleTickerProviderStateMixin {
+class _FoldingCellState extends State<FoldingCell> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-
+  // late List<SingleState> timeLineStates = [];
   @override
   void initState() {
     super.initState();
+    _initController();
+    // initTimeLine();
+  }
+
+  void _initController(){
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 560),
@@ -90,6 +102,11 @@ class _FoldingCellState extends State<FoldingCell>
     });
   }
 
+  // void initTimeLine(){
+  //   timeLineStates = widget.timeLineInfo.map<SingleState>((dynamic info){
+  //     return SingleState(stateTitle: info);
+  //   }).toList();
+  // }
   @override
   void dispose() {
     _controller.dispose();
@@ -134,7 +151,7 @@ class _FoldingCellState extends State<FoldingCell>
     double padding = 8.0;
     double verticalPadding = 8.0;
     double cardHeight = 130.0;
-    double totalHeight = 353.0;
+    double totalHeight = 323.0;
 
     return GestureDetector(
       onTap: () {
@@ -192,7 +209,8 @@ class _FoldingCellState extends State<FoldingCell>
                                     taskManager:widget.taskManager,
                                     taskCreater: widget.taskCreater,
                                     taskCreateTime: widget.taskCreateTime,
-                                    taskDeadLine: widget.taskDeadLine
+                                    taskDeadLine: widget.taskDeadLine,
+                                    taskProject: widget.taskProject
                                 ),
                                 animation: generateAnimation(
                                   beginAngle: 90.0,
@@ -210,7 +228,8 @@ class _FoldingCellState extends State<FoldingCell>
                           child: FoldingComponent(
                             frontChild: taskCardTitleComponent(
                               taskTitle: widget.taskTitle,
-                              taskPriority: widget.taskPriority
+                              taskPriority: widget.taskPriority,
+                              taskProject: widget.taskProject
                             ),
                             animation: generateAnimation(
                               beginAngle: 0.0,
@@ -221,12 +240,13 @@ class _FoldingCellState extends State<FoldingCell>
                           ),
                       ),
                       Container(
-                        height: 72,
+                        height: 42,
                         child: FoldingComponent(
                           isFrontShowing: true,
                           frontChild: Container(
                             child: taskCardFlowChartComponent(
-                              flowInfo: []
+                              flowInfo: widget.timeLineInfo,
+                              context: context
                             ),
                           ),
                           animation: generateAnimation(

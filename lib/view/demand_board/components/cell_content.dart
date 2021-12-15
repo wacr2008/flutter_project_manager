@@ -1,12 +1,13 @@
+import 'package:admin/utils/dialog.dart';
 import 'package:admin/utils/sharedpreference_util.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timelines/timelines.dart';
 
 import '../../components/color_hex.dart';
-import 'flow_chart.dart';
 
 /// 封面
-Widget taskCardCover({required int id, required String taskState,
+Widget taskCardCover({required int id, required String taskState, required String taskProject,
   required String taskPriority, required String taskTitle, required String taskCreater,
   required String taskCreateTime, required String taskManager, required String taskDeadLine}) {
   double height = 165.0;
@@ -72,6 +73,14 @@ Widget taskCardCover({required int id, required String taskState,
                               '优先级:  $taskPriority',
                               style: TextStyle(
                                 color: Colors.grey,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Spacer(),
+                            Text(
+                              '所属项目:  $taskProject',
+                              style: TextStyle(
+                                color: Colors.black,
                                 fontSize: 18,
                               ),
                             ),
@@ -173,33 +182,45 @@ PopupMenuButton managerMenu = new PopupMenuButton<String>(
     },
     itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
           PopupMenuItem(
-            child: new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Icon(
-                  Icons.download_done,
-                  color: Colors.black,
-                ),
-                Text('已完成该需求'),
-              ],
+            child: GestureDetector(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Icon(
+                    Icons.download_done,
+                    color: Colors.white,
+                  ),
+                  // SizedBox(width: 2,),
+                  Text('已完成该需求'),
+                ],
+              ),
+              onTap: (){
+                DialogUtil.showMyDialog(context, dialogContent(), "完成需求");
+              },
             ),
+
             value: '完成',
           ),
           PopupMenuItem(
-            child: new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Icon(
-                  Icons.highlight_off,
-                  color: Colors.black,
-                ),
-                Text('拒绝该需求')
-              ],
+            child: GestureDetector(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Icon(Icons.highlight_off, color: Colors.white,),
+                  // SizedBox(width: 2,),
+                  Text('拒绝该需求')
+                ],
+              ),
+              onTap: (){
+                DialogUtil.showMyDialog(context, dialogContent(), "拒绝需求");
+              },
             ),
             value: '拒绝',
           ),
         ]
 );
+
+
 
 PopupMenuButton createrMenu = new PopupMenuButton<String>(
     onSelected: (String value) {
@@ -207,29 +228,75 @@ PopupMenuButton createrMenu = new PopupMenuButton<String>(
     },
     itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
       PopupMenuItem(
-        child: new Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Icon(Icons.download_done,color: Colors.black,),
-            Text('需求验收通过'),
-          ],
+        child: GestureDetector(
+          child:  Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Icon(Icons.download_done,color: Colors.white,),
+              // SizedBox(width: 2,),
+              Text('需求验收通过'),
+            ],
+          ),
+          onTap: (){
+            DialogUtil.showMyDialog(context, dialogContent(), "通过验收");
+          },
         ),
         value: '通过',
       ),
       PopupMenuItem(
-        child: new Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Icon(Icons.highlight_off,color: Colors.black,),
-            Text('需求验收未通过'),
-          ],
+        child: GestureDetector(
+          child:Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Icon(Icons.highlight_off,color: Colors.white,),
+              // SizedBox(width: 2,),
+              Text('需求验收未通过'),
+            ],
+          ),
+          onTap: (){
+            DialogUtil.showMyDialog(context, dialogContent(), "未通过验收");
+          },
         ),
         value: '未通过',
       )
     ]);
 
+Widget dialogContent(){
+  return Card(
+      margin: EdgeInsets.all(4),
+      child: SizedBox(
+        width: 320,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '    说明:',
+              style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white
+              ),
+            ),
+            Container(
+              color: Colors.white,
+              child:  Padding(
+                padding: EdgeInsets.all(4),
+                child: TextField(
+                  style: TextStyle(
+                      color: Colors.black
+                  ),
+                  maxLines: 4,
+                ),
+              ),
+            ),
+          ],
+        ),
+      )
+  );
+}
+
 /// 标题（第一行
-Widget taskCardTitleComponent({required String taskTitle, required String taskPriority}) {
+Widget taskCardTitleComponent({required String taskTitle, required String taskProject,required String taskPriority}) {
   return Container(
     color: Colors.white,
     padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -249,30 +316,80 @@ Widget taskCardTitleComponent({required String taskTitle, required String taskPr
            ),
             Spacer(),
             Text(
-              taskPriority,
+              '优先级:$taskPriority',
               style: TextStyle(
                 color: Colors.grey,
                 fontSize: 18,
               ),
             ),
             Spacer(),
+            Text(
+              '所属项目:  $taskProject',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+              ),
+            ),
+            Spacer(),
           ],
         ),
-        // Divider(
-        //   color: Colors.grey[300],
-        // ),
       ],
     ),
   );
 }
 
 /// 流程（第二行
-Widget taskCardFlowChartComponent({required flowInfo}) {
-  List flow = ['已创建','审核中','执行中'];
-  return Container(
+Widget taskCardFlowChartComponent({required List flowInfo, required BuildContext context}) {
+  List info = [ 'zwn','2021-12-12 21:34:34'];
+  return GestureDetector(
+    child: Container(
+      color: Colors.white,
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.fromLTRB(22, 0, 10, 0),
+      child: Text(
+        '近期动态：${info[0]}于${info[1]}对需求做了改动',
+        style: TextStyle(
+            fontSize: 18,
+            color: Colors.black
+        ),
+      ),
+    ),
+    onTap: (){
+      DialogUtil.showMyDialog(context,timeLineWidget(),'需求log');
+    }
+  );
+}
+
+///dialog的内容
+Widget timeLineWidget(){
+  return Card(
     color: Colors.white,
-    padding: EdgeInsets.fromLTRB(22, 0, 10, 0),
-    child: flowChart(flowInfo: flow),
+    child:Padding(
+      padding: EdgeInsets.only(top: 16),
+      child: SizedBox(
+        width: 320,
+        height: 360,
+        child: Timeline.tileBuilder(
+          theme: TimelineThemeData(
+            nodePosition: 0.07,
+          ),
+          builder: TimelineTileBuilder.fromStyle(
+            indicatorStyle: IndicatorStyle.outlined,
+            contentsAlign: ContentsAlign.basic,
+            contentsBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Text(
+                'Timeline Event $index',
+                style: TextStyle(
+                    color: Colors.black
+                ),
+              ),
+            ),
+            itemCount: 2,
+          ),
+        ),
+      ),
+    ),
   );
 }
 
