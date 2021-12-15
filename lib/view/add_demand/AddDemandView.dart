@@ -34,6 +34,7 @@ class AddDemandPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         _titleInput(),
+                        _projectInput(),
                         _selectDeadLine(context),
                         _selectManager(),
                         _selectPriority(),
@@ -63,7 +64,7 @@ class AddDemandPage extends StatelessWidget {
         Container(
           margin: EdgeInsets.fromLTRB(20, 24, 0, 0),
           child: Text(
-            '标题:',
+            '标题:    ',
             style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -71,7 +72,6 @@ class AddDemandPage extends StatelessWidget {
           ),
         ),
         Expanded(child: Obx(() => _titleInputArea()), ),
-
       ],
     );
   }
@@ -87,6 +87,60 @@ class AddDemandPage extends StatelessWidget {
         ),
         decoration: InputDecoration(
           errorText: !logic.hasInputTitle.value ? '标题不能为空' : null,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
+          ),
+          contentPadding: EdgeInsets.only(
+            top: 0,
+            bottom: 0,
+            left: 20,
+          ),
+          focusColor: Colors.white,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
+            borderSide: BorderSide(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+  Widget _projectInput() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: EdgeInsets.fromLTRB(20, 24, 0, 0),
+          child: Text(
+            '项目名:',
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18),
+          ),
+        ),
+        Expanded(child: Obx(() => _projectInputArea()), ),
+      ],
+    );
+  }
+
+  Widget _projectInputArea() {
+    return Container(
+      margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
+      child: TextField(
+        controller: logic.projectController,
+        maxLength: 25,
+        style: TextStyle(
+          fontSize: 16,
+        ),
+        decoration: InputDecoration(
+          errorText: !logic.hasInputProject.value ? '项目名不能为空' : null,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(20),
@@ -287,7 +341,7 @@ class AddDemandPage extends StatelessWidget {
     );
   }
 
-  FloatingActionButton confirmButton = FloatingActionButton(
+  final FloatingActionButton confirmButton = FloatingActionButton(
     backgroundColor: Colors.lightBlue,
     child: Icon(Icons.assignment_turned_in_rounded, size: 28,),
     onPressed: () {
