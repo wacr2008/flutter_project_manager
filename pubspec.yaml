@@ -39,6 +39,7 @@ dependencies:
   shared_preferences: ^2.0.5
   flutter_staggered_animations: ^1.0.0
   timelines: ^0.1.0
+  flutter_toggle_tab: ^1.1.7
 
 dev_dependencies:
   flutter_test:

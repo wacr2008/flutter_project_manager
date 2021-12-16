@@ -20,6 +20,9 @@ class LoginController extends GetxController {
   RxBool isFront = true.obs;
   Color registerColor1 = Color(0xFF212332);
   Color registerColor2 = Color(0xFF2A2D3E);
+  int value = 0;
+  RxInt identify = 1.obs;
+
 
   void changeCard() {
     this.isFront.value = true;

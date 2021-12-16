@@ -7,6 +7,7 @@ import 'package:admin/view/login/components/particles.dart';
 import 'package:admin/view/login/login_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
+import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:get/get.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
@@ -228,18 +229,9 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
           width: 380,
           child: Center(
             child: Container(
-              margin: EdgeInsets.only(top: 30),
+              margin: EdgeInsets.only(top: 60),
               child: Column(
                 children: [
-                  Container(
-                    child: ClipOval(
-                      child: Image.asset(
-                        'images/lzw_img.png',
-                        fit: BoxFit.fill,
-                        width: 160,
-                      ),
-                    ),
-                  ),
                   Text(
                     "Register",
                     style: TextStyle(
@@ -361,7 +353,69 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
+                    margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
+                    child: TextField(
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                      decoration: InputDecoration(
+                        hintText: 'email',
+                        hintStyle: TextStyle(
+                          color: Color(0xFF212332),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.only(
+                          top: 0,
+                          bottom: 0,
+                          left: 30,
+                        ),
+                        prefixIcon: Icon(
+                          Icons.email,
+                          color: Color(0xFF212332),
+                        ),
+                        focusColor: Color(0xFF212332),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                          borderSide: BorderSide(
+                            color: Color(0xFF2A2D3E),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    child: Obx(
+                      () => FlutterToggleTab(
+                        width: 20,
+                        borderRadius: 15,
+                        selectedIndex: controller.identify.value,
+                        isShadowEnable: true,
+                        selectedTextStyle: TextStyle(
+                            color: Colors.white54,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
+                        unSelectedTextStyle: TextStyle(
+                            color: Color(0xFF212332),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
+                        unSelectedBackgroundColors: [Colors.transparent],
+                        labels: ["产品", "技术"],
+                        icons: [Icons.lightbulb, Icons.android_outlined],
+                        selectedLabelIndex: (index) {
+                          controller.identify.value = index;
+                        },
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
                     child: AnimatedButton(
                       height: 35,
                       width: 200,
@@ -387,7 +441,7 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, 35, 0, 0),
                     child: Text(
                       "already have account? click double!",
                       style: TextStyle(
@@ -425,9 +479,9 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
     }
     return Scaffold(
       body:
-      // LogPage()
-      // Center(child: LogItemCard(senderName: "senderName", commitContent: "commitContent", projectName: "projectName", time: "time"),),
-      Stack(
+          // LogPage()
+          // Center(child: LogItemCard(senderName: "senderName", commitContent: "commitContent", projectName: "projectName", time: "time"),),
+          Stack(
         children: [
           Positioned.fill(child: AnimatedBackground()),
           Positioned.fill(child: Particles(30)),
