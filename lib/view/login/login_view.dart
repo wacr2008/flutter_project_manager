@@ -74,7 +74,7 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
           width: 380,
           child: Center(
             child: Container(
-              margin: EdgeInsets.only(top: 30),
+              margin: EdgeInsets.only(top: 20),
               child: Column(
                 children: [
                   Container(
@@ -95,13 +95,14 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
                         fontSize: 50),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(30, 35, 30, 0),
+                    margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
                     child: TextField(
+                      controller: controller.loginUsernameController,
                       style: TextStyle(
                         fontSize: 16,
                       ),
                       decoration: InputDecoration(
-                        hintText: 'account',
+                        hintText: 'username',
                         hintStyle: TextStyle(
                           color: Color(0xFF212332),
                         ),
@@ -134,6 +135,7 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
                   Container(
                     margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
                     child: TextField(
+                      controller: controller.loginPwdController,
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -170,8 +172,35 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
                     ),
                   ),
                   Container(
+                    margin: EdgeInsets.only(top: 20),
+                    child: Obx(
+                          () => FlutterToggleTab(
+                        width: 20,
+                        borderRadius: 15,
+                        selectedIndex: controller.identify2.value,
+                        isShadowEnable: true,
+                        selectedTextStyle: TextStyle(
+                            color: Colors.white54,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
+                        unSelectedTextStyle: TextStyle(
+                            color: Color(0xFF212332),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
+                        unSelectedBackgroundColors: [Colors.transparent],
+                        labels: ["产品", "技术"],
+                        icons: [Icons.lightbulb, Icons.android_outlined],
+                        selectedLabelIndex: (index) {
+                          controller.identify2.value = index;
+                        },
+                      ),
+                    ),
+                  ),
+                  Container(
                       margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
                       child: RoundedLoadingButton(
+                        resetDuration: Duration(seconds: 5),
+                        resetAfterDuration: true,
                         child: Text(
                           'GO!',
                           style: TextStyle(color: Colors.white),
@@ -181,25 +210,10 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
                         height: 45,
                         width: 200,
                         color: Color(0xFF2A2D3E),
-                      )
-                      // AnimatedButton(
-                      //   height: 45,
-                      //   width: 200,
-                      //   text: 'GO!',
-                      //   isReverse: true,
-                      //   selectedTextColor: Colors.white,
-                      //   selectedBackgroundColor: Color(0xFF2A2D3E),
-                      //   transitionType: TransitionType.LEFT_TO_RIGHT,
-                      //   // textStyle: submitTextStyle,
-                      //   backgroundColor: Colors.transparent,
-                      //   borderColor: Color(0xFF2A2D3E),
-                      //   borderRadius: 20,
-                      //   borderWidth: 1,
-                      //   onPress: () {Get.to(page)},
-                      // ),
                       ),
+                  ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 60, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, 25, 0, 0),
                     child: Text(
                       "no account? click double!",
                       style: TextStyle(
@@ -242,11 +256,12 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
                   Container(
                     margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
                     child: TextField(
+                      controller: controller.registerUsernameController,
                       style: TextStyle(
                         fontSize: 16,
                       ),
                       decoration: InputDecoration(
-                        hintText: 'account',
+                        hintText: 'username',
                         hintStyle: TextStyle(
                           color: Color(0xFF212332),
                         ),
@@ -279,6 +294,7 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
                   Container(
                     margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
                     child: TextField(
+                      controller: controller.registerPwdController,
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -317,6 +333,7 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
                   Container(
                     margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
                     child: TextField(
+                      controller: controller.registerConfirmPwdController,
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -355,6 +372,7 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
                   Container(
                     margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
                     child: TextField(
+                      controller: controller.registerEmailController,
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -395,7 +413,7 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
                       () => FlutterToggleTab(
                         width: 20,
                         borderRadius: 15,
-                        selectedIndex: controller.identify.value,
+                        selectedIndex: controller.identify1.value,
                         isShadowEnable: true,
                         selectedTextStyle: TextStyle(
                             color: Colors.white54,
@@ -409,7 +427,7 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
                         labels: ["产品", "技术"],
                         icons: [Icons.lightbulb, Icons.android_outlined],
                         selectedLabelIndex: (index) {
-                          controller.identify.value = index;
+                          controller.identify1.value = index;
                         },
                       ),
                     ),
@@ -431,12 +449,14 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
                       borderRadius: 20,
                       borderWidth: 1,
                       onPress: () => {
-                        Timer(Duration(seconds: 1), () {
-                          animate();
-                          // Color temp = controller.registerColor1;
-                          // controller.registerColor1 = controller.registerColor2;
-                          // controller.registerColor2 = temp;
-                        })
+                        controller.handleRegister().then((value) => {
+                              if (value == 0) {
+                                 Timer(Duration(seconds: 1), () {
+                                  animate();
+                                },),
+                              }
+                            },
+                        ),
                       },
                     ),
                   ),

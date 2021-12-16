@@ -104,7 +104,7 @@ class SideMenu extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: "Profile",
+            title: "个人中心",
             svgSrc: "assets/icons/menu_profile.svg",
             press: () {
               mainScreenController.selectedItem.value = 3;

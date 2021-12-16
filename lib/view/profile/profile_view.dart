@@ -12,7 +12,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Row(
+      body: SingleChildScrollView(child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -158,7 +158,8 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      ),)
+
     );
   }
 }
