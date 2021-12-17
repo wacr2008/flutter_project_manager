@@ -1,5 +1,6 @@
 import 'package:admin/utils/dialog.dart';
 import 'package:admin/utils/sharedpreference_util.dart';
+import 'package:admin/view/components/inkwell_basic_card/inkwell_basic_card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timelines/timelines.dart';
@@ -341,22 +342,24 @@ Widget taskCardTitleComponent({required String taskTitle, required String taskPr
 /// 流程（第二行
 Widget taskCardFlowChartComponent({required List flowInfo, required BuildContext context}) {
   List info = [ 'zwn','2021-12-12 21:34:34'];
-  return GestureDetector(
-    child: Container(
-      color: Colors.white,
-      alignment: Alignment.centerLeft,
-      padding: EdgeInsets.fromLTRB(22, 0, 10, 0),
-      child: Text(
-        '近期动态：${info[0]}于${info[1]}对需求做了改动',
-        style: TextStyle(
-            fontSize: 18,
-            color: Colors.black
+  return BasicCard(
+    margin: EdgeInsets.zero,
+      shape:  RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(0))),
+      child: Container(
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.fromLTRB(22, 0, 10, 0),
+        child: Text(
+          '近期动态：${info[0]}于${info[1]}对需求做了改动',
+          style: TextStyle(
+              fontSize: 18,
+              color: Colors.black
+          ),
         ),
       ),
-    ),
-    onTap: (){
-      DialogUtil.showMyDialog(context,timeLineWidget(),'需求log');
-    }
+        onTap: (){
+          DialogUtil.showMyDialog(context,timeLineWidget(),'需求log');
+        }
   );
 }
 
