@@ -77,7 +77,7 @@ class SideMenu extends StatelessWidget {
             child: Image.asset("assets/images/logo.png"),
           ),
           DrawerListTile(
-            title: "Dashboard",
+            title: "团队日志",
             svgSrc: "assets/icons/menu_dashboard.svg",
             press: () {
               mainScreenController.selectedItem.value = 0;
@@ -104,7 +104,7 @@ class SideMenu extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: "Profile",
+            title: "个人中心",
             svgSrc: "assets/icons/menu_profile.svg",
             press: () {
               mainScreenController.selectedItem.value = 3;
