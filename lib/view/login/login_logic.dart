@@ -60,7 +60,7 @@ class LoginController extends GetxController {
     } else {
       Dio dio = Dio();
       Response response = await dio.post(
-        'http://localhost:8081/login',
+        'http://localhost:8081/user/login',
         queryParameters: {
           'username': username,
           'password': pwd,

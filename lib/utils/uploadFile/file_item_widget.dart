@@ -56,7 +56,7 @@ class _FileItemWidgetState extends State<FileItemWidget> {
     }
 
 
-    var url = 'http://localhost:8088/api/file/upload';
+    var url = 'http://localhost:8081/demand/upload';
 
     html.HttpRequest.request(
       url,

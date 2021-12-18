@@ -196,7 +196,11 @@ PopupMenuButton managerMenu = new PopupMenuButton<String>(
                 ],
               ),
               onTap: (){
-                DialogUtil.showMyDialog(context, dialogContent(), "完成需求");
+                DialogUtil.showConfirmDialog(
+                    context: context,
+                    child: dialogContent(),
+                    title:"完成需求"
+                );
               },
             ),
 
@@ -213,7 +217,11 @@ PopupMenuButton managerMenu = new PopupMenuButton<String>(
                 ],
               ),
               onTap: (){
-                DialogUtil.showMyDialog(context, dialogContent(), "拒绝需求");
+                DialogUtil.showConfirmDialog(
+                    context: context,
+                    child: dialogContent(),
+                    title: "拒绝需求"
+                );
               },
             ),
             value: '拒绝',
@@ -239,7 +247,11 @@ PopupMenuButton createrMenu = new PopupMenuButton<String>(
             ],
           ),
           onTap: (){
-            DialogUtil.showMyDialog(context, dialogContent(), "通过验收");
+            DialogUtil.showConfirmDialog(
+                context: context,
+                child: dialogContent(),
+                title: "通过验收"
+            );
           },
         ),
         value: '通过',
@@ -255,7 +267,11 @@ PopupMenuButton createrMenu = new PopupMenuButton<String>(
             ],
           ),
           onTap: (){
-            DialogUtil.showMyDialog(context, dialogContent(), "未通过验收");
+            DialogUtil.showConfirmDialog(
+                context: context,
+                child: dialogContent(),
+                title: "未通过验收"
+            );
           },
         ),
         value: '未通过',
@@ -358,7 +374,11 @@ Widget taskCardFlowChartComponent({required List flowInfo, required BuildContext
         ),
       ),
         onTap: (){
-          DialogUtil.showMyDialog(context,timeLineWidget(),'需求log');
+          DialogUtil.showCommonDialog(
+              context: context,
+              child: timeLineWidget(),
+              title:'需求log'
+          );
         }
   );
 }

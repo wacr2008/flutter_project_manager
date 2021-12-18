@@ -7,7 +7,7 @@ import '../../constants.dart';
 import 'AddDemandLogic.dart';
 
 class AddDemandPage extends StatelessWidget {
-  final AddDemandLogic logic = Get.put(AddDemandLogic());
+ static final AddDemandLogic _logic = Get.put(AddDemandLogic());
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class AddDemandPage extends StatelessWidget {
                         _selectDeadLine(context),
                         _selectManager(),
                         _selectPriority(),
-                        _selectDemandFile(),
+                        // _selectDemandFile(),
 
                         // if (Responsive.isMobile(context))
                         // if (Responsive.isMobile(context))
@@ -49,7 +49,7 @@ class AddDemandPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 60,),
-            confirmButton,
+            confirmButton(context),
           ],
         ),
       ),
@@ -80,13 +80,13 @@ class AddDemandPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
       child: TextField(
-        controller: logic.titleController,
+        controller: _logic.titleController,
         maxLength: 255,
         style: TextStyle(
           fontSize: 16,
         ),
         decoration: InputDecoration(
-          errorText: !logic.hasInputTitle.value ? '标题不能为空' : null,
+          errorText: !_logic.hasInputTitle.value ? '标题不能为空或含有空格' : null,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(20),
@@ -134,13 +134,13 @@ class AddDemandPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
       child: TextField(
-        controller: logic.projectController,
+        controller: _logic.projectController,
         maxLength: 25,
         style: TextStyle(
           fontSize: 16,
         ),
         decoration: InputDecoration(
-          errorText: !logic.hasInputProject.value ? '项目名不能为空' : null,
+          errorText: !_logic.hasInputProject.value ? '项目名不能为空或含有空格' : null,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(20),
@@ -180,7 +180,7 @@ class AddDemandPage extends StatelessWidget {
                     fontSize: 18),
               ),
             SizedBox(width: 20,),
-            Obx(()=> _showDatePicker(context, logic.selectedDeadLine.value),) ,
+            Obx(()=> _showDatePicker(context, _logic.selectedDeadLine.value),) ,
             Expanded(child: Container())
           ],
         )
@@ -241,7 +241,7 @@ class AddDemandPage extends StatelessWidget {
           },
         ).then((value) {
           //这样可以只显示日期
-          logic.selectedDeadLine.value = value.toString().split(' ')[0];
+          _logic.selectedDeadLine.value = value.toString().split(' ')[0];
         });
       },
     );
@@ -271,14 +271,14 @@ class AddDemandPage extends StatelessWidget {
 
   Widget _managerSelecter() {
     return  DropdownButton<String>(
-      items: logic.managerItems,
-      value: logic.selectedManager.value,
+      items: _logic.managerItems,
+      value: _logic.selectedManager.value,
       selectedItemBuilder: (BuildContext context) {
-        return logic.managerItems;
+        return _logic.managerItems;
       },
       iconEnabledColor: Colors.white,
       onChanged: (newValue) {
-          logic.selectedManager.value = newValue.toString();
+          _logic.selectedManager.value = newValue.toString();
       },
     );
   }
@@ -307,45 +307,47 @@ class AddDemandPage extends StatelessWidget {
 
   Widget _prioritySelecter() {
     return  DropdownButton<String>(
-      items: logic.priorityItems,
-      value: logic.selectedPriority.value,
+      items: _logic.priorityItems,
+      value: _logic.selectedPriority.value,
       selectedItemBuilder: (BuildContext context) {
-        return logic.priorityItems;
+        return _logic.priorityItems;
       },
       iconEnabledColor: Colors.white,
       onChanged: (newValue) {
-        logic.selectedPriority.value = newValue.toString();
+        _logic.selectedPriority.value = newValue.toString();
       },
     );
   }
+  //
+  // Widget _selectDemandFile(){
+  //   return Container(
+  //       margin: EdgeInsets.fromLTRB(20, 10, 0, 20),
+  //       child:  Row(
+  //         mainAxisAlignment: MainAxisAlignment.start,
+  //         crossAxisAlignment: CrossAxisAlignment.center,
+  //         children: [
+  //           Text(
+  //             '上传需求文档:',
+  //             style: TextStyle(
+  //                 color: Colors.white,
+  //                 fontWeight: FontWeight.bold,
+  //                 fontSize: 18),
+  //           ),
+  //           SizedBox(width: 26,),
+  //           Expanded(child: UploadWidget()),
+  //           SizedBox(width: 160,)
+  //         ],
+  //       )
+  //   );
+  // }
 
-  Widget _selectDemandFile(){
-    return Container(
-        margin: EdgeInsets.fromLTRB(20, 10, 0, 20),
-        child:  Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              '上传需求文档:',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
-            ),
-            SizedBox(width: 26,),
-            Expanded(child: UploadWidget()),
-            SizedBox(width: 160,)
-          ],
-        )
+  Widget confirmButton(BuildContext context){
+    return FloatingActionButton(
+      backgroundColor: Colors.lightBlue,
+      child: Icon(Icons.assignment_turned_in_rounded, size: 28,),
+      onPressed: () {
+        _logic.createDemand(context);
+      },
     );
   }
-
-  final FloatingActionButton confirmButton = FloatingActionButton(
-    backgroundColor: Colors.lightBlue,
-    child: Icon(Icons.assignment_turned_in_rounded, size: 28,),
-    onPressed: () {
-
-    },
-  );
 }
