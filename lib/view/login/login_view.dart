@@ -177,7 +177,7 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
                           () => FlutterToggleTab(
                         width: 20,
                         borderRadius: 15,
-                        selectedIndex: controller.identify2.value,
+                        selectedIndex: controller.identify2.value - 1,
                         isShadowEnable: true,
                         selectedTextStyle: TextStyle(
                             color: Colors.white54,
@@ -191,7 +191,7 @@ class LoginState extends State<LoginPage> with TickerProviderStateMixin {
                         labels: ["产品", "技术"],
                         icons: [Icons.lightbulb, Icons.android_outlined],
                         selectedLabelIndex: (index) {
-                          controller.identify2.value = index;
+                          controller.identify2.value = index + 1;
                         },
                       ),
                     ),

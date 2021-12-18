@@ -35,7 +35,7 @@ class LoginController extends GetxController {
   Color registerColor2 = Color(0xFF2A2D3E);
   int value = 0;
   RxInt identify1 = 0.obs;
-  RxInt identify2 = 0.obs;
+  RxInt identify2 = 1.obs;
 
   void changeCard() {
     this.isFront.value = true;
@@ -74,7 +74,7 @@ class LoginController extends GetxController {
       int code = response.data['code'];
       if (code == 0) {
         String token = response.data['data'];
-        String ide = identify2.value == 1 ? "技术" : "产品";
+        String ide = identify2.value == 2 ? "技术" : "产品";
         s.setString('identity', ide);
         s.setString('token', token);
         btnController.success();
